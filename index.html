@@ -10395,7 +10395,7 @@
                     return html;
                 }
                 function ChangeSigns(restricts) {
-                    let html = "<b>Меняем знаки у ограничений с " + GE + ", путём умножения на -1:</b><br>";
+                    let html = "<b>dan cheklovlar belgilarini o'zgartiring " + GE + ", ga ko'paytirish orqali -1:</b><br>";
                     let have = false;
                     for (let i = 0; i < restricts.length; i++) {
                         if (restricts[i].sign == GE) {
@@ -10432,18 +10432,18 @@
                     }
                     let html = ""
                     if (k > 2) {
-                        html += "Для каждого ограничения с неравенством <b>добавляем дополнительные переменные</b> x<sub>" + (n + 1) + "</sub>..x<sub>" + (n + k) + "</sub>.<br>"
+                        html += "Tengsizlik bilan har bir cheklov uchun<b>qoshimcha qoshing ozgaruvchilar</b> x<sub>" + (n + 1) + "</sub>..x<sub>" + (n + k) + "</sub>.<br>"
                     } else if (k == 2) {
-                        html += "Для каждого ограничения с неравенством <b>добавляем дополнительные переменные</b> x<sub>" + (n + 1) + "</sub> и x<sub>" + (n + k) + "</sub>.<br>"
+                        html += "Tengsizlik bilan har bir cheklov uchun<b>qoshimcha qoshing ozgaruvchilar</b> x<sub>" + (n + 1) + "</sub> и x<sub>" + (n + k) + "</sub>.<br>"
                     } else if (k == 1) {
-                        html += "Для ограничения с неравенством <b>добавляем дополнительную переменную</b> x<sub>" + (n + 1) + "</sub>.<br>"
+                        html += "Tengsizlik bilan cheklash uchun <b>qo'shimcha o'zgaruvchini qo'shing</b> x<sub>" + (n + 1) + "</sub>.<br>"
                     }
                     for (let i = 0; i < n; i++)
                         simplex.C.push(func[i])
                     for (let i = 0; i < k; i++)
                         simplex.C.push(new Fraction());
                     simplex.C.push(new Fraction("0"))
-                    let findHtml = "<b>Ищем начальное базисное решение:</b><br>"
+                    let findHtml = "<b>Biz boshlang'ich asosiy yechimni qidirmoqdamiz:</b><br>"
                     let index = 0;
                     let unknown = -1;
                     let basisHtml = []
@@ -10456,11 +10456,11 @@
                         if (restricts[i].sign == EQ) {
                             simplex.basis.push(unknown);
                             unknown--;
-                            basisHtml[simplex.basis.length - 1] = "Ограничение " + (i + 1) + " содержит равенство. Базисная переменная для этого ограничения будет определена позднее.<br>";
+                            basisHtml[simplex.basis.length - 1] = "Cheklash " + (i + 1) + " tenglikni o‘z ichiga oladi. Ushbu cheklovning asosiy o'zgaruvchisi keyinroq aniqlanadi.<br>";
                         } else if (NEGATIVE_BASIS && restricts[i].sign == GE) {
                             simplex.basis.push(unknown);
                             unknown--;
-                            basisHtml[simplex.basis.length - 1] = "Ограничение " + (i + 1) + " содержит неравенство с " + GE + ". Базисная переменная для этого ограничения будет определена позднее.<br>";
+                            basisHtml[simplex.basis.length - 1] = "Cheklash " + (i + 1) + " bilan tengsizlikni o'z ichiga oladi " + GE + ". Ushbu cheklovning asosiy o'zgaruvchisi keyinroq aniqlanadi.<br>";
                         }
                         for (let j = 0; j < k; j++) {
                             if (restricts[i].sign == EQ) {
@@ -10471,7 +10471,7 @@
                                 } else if (!inserted) {
                                     simplex.table[i].push(new Fraction("1"));
                                     simplex.basis.push(n + index);
-                                    basisHtml[simplex.basis.length - 1] = "Ограничение " + (i + 1) + " содержит неравенство, базисной будет добавленная дополнительная переменная x<sub>" + (n + index + 1) + "</sub><br>"
+                                    basisHtml[simplex.basis.length - 1] = "Cheklash " + (i + 1) + " tengsizlikni o'z ichiga oladi, qo'shilgan qo'shimcha o'zgaruvchi asos bo'ladi x<sub>" + (n + index + 1) + "</sub><br>"
                                     index++;
                                     inserted = true;
                                 }
@@ -10497,11 +10497,11 @@
                             simplex.basis[i] = unknown--;
                         } else {
                             simplex.basis[i] = column;
-                            basisHtml[i] = "Столбец " + (column + 1) + " является частью единичной матрицы. Переменная x<sub>" + (column + 1) + "</sub> входит в начальный базис<br>";
+                            basisHtml[i] = "Ustun " + (column + 1) + " identifikatsiya matritsasining bir qismidir. O'zgaruvchan x<sub>" + (column + 1) + "</sub> dastlabki asosga kiritilgan<br>";
                         }
                     }
                     if (k > 0) {
-                        html += "Перепишем ограничения в каноническом виде:<br>"
+                        html += "Keling, cheklovlarni kanonik shaklda qayta yozamiz:<br>"
                         html += systemHtml + "<br>"
                     }
                     html += findHtml + basisHtml.join("") + "<br>"
@@ -10519,15 +10519,15 @@
                 function MakeVarBasis(simplex, row, column, print=false) {
                     let html = "";
                     if (simplex.basis[row] < 0)
-                        html += "В качестве базисной переменной ?<sub>" + (-simplex.basis[row]) + "</sub> берём x<sub>" + (column + 1) + "</sub>.<br>"
+                        html += "Asosiy o'zgaruvchi sifatida ?<sub>" + (-simplex.basis[row]) + "</sub> olish x<sub>" + (column + 1) + "</sub>.<br>"
                     else
-                        html += "В качестве базисной переменной x<sub>" + (simplex.basis[row] + 1) + "</sub> берём x<sub>" + (column + 1) + "</sub>.<br>"
+                        html += "Asosiy o'zgaruvchi sifatida x<sub>" + (simplex.basis[row] + 1) + "</sub> olish x<sub>" + (column + 1) + "</sub>.<br>"
                     simplex.basis[row] = column;
                     if (print)
                         html += PrintTable(simplex, row, column);
                     let x = simplex.table[row][column];
                     if (!x.isOne())
-                        html += "Делим строку " + (row + 1) + " на " + x.print(printMode) + ". ";
+                        html += "Ipni ajrating " + (row + 1) + " на " + x.print(printMode) + ". ";
                     let rows = []
                     for (let i = 1; i <= simplex.m; i++)
                         if (i != row + 1)
@@ -10536,7 +10536,7 @@
                         html += "Из строк " + rows.join(", ");
                     else
                         html += "Из строки " + rows[0]
-                    html += " вычитаем строку " + (row + 1) + ", умноженную на соответствующий элемент в столбце " + (column + 1) + ".<br>"
+                    html += " вычитаем строку " + (row + 1) + ", ustundagi mos keladigan elementga ko'paytiriladi " + (column + 1) + ".<br>"
                     DivRow(simplex, row, x);
                     SubRows(simplex, row, column);
                     return html;
@@ -10599,8 +10599,8 @@
                             continue;
                         let column = GetBasisColumn(simplex, i);
                         if (column > -1) {
-                            html += "В качестве базисной переменной ?<sub>" + (-simplex.basis[i]) + "</sub> берём x<sub>" + (column + 1) + "</sub>"
-                            html += ". Делим строку " + (i + 1) + " на " + simplex.table[i][column].print(printMode) + ".<br>"
+                            html += "Asosiy o'zgaruvchi sifatida ?<sub>" + (-simplex.basis[i]) + "</sub> olish x<sub>" + (column + 1) + "</sub>"
+                            html += ". Ipni ajrating " + (i + 1) + " на " + simplex.table[i][column].print(printMode) + ".<br>"
                             DivRow(simplex, i, simplex.table[i][column]);
                             simplex.basis[i] = column;
                         } else {
@@ -10658,14 +10658,14 @@
                     let row = MaxAbsB(simplex);
                     let column = MaxAbsIndex(simplex, row);
                     let html = "";
-                    html += "Максимальное по модулю |b|<sub>max</sub> = |" + simplex.b[row].print(printMode) + "| находится в строке " + (row + 1) + ".<br>";
+                    html += "Maksimal modul |b|<sub>max</sub> = |" + simplex.b[row].print(printMode) + "| qatorda " + (row + 1) + ".<br>";
                     if (column == -1) {
-                        html += "В строке " + (row + 1) + " отсутстуют отрицательные значения. Решение задачи не существует.";
+                        html += "Mos ravishda " + (row + 1) + " etishmayotgan qadriyatlar. Muammoning yechimi mavjud emas.";
                         return html;
                     }
-                    html += "Максимальный по модулю элемент в строке " + (row + 1) + " = " + simplex.table[row][column].print(printMode) + "  находится в столбце " + (column + 1) + ".<br>";
+                    html += "Qatordagi maksimal modul elementi " + (row + 1) + " = " + simplex.table[row][column].print(printMode) + "  ustunda joylashgan " + (column + 1) + ".<br>";
                     html += MakeVarBasis(simplex, row, column);
-                    html += "<br><b>Обновлённая таблица:</b>";
+                    html += "<br><b>Yangilangan jadval:</b>";
                     html += PrintTable(simplex, row, column);
                     return html;
                 }
@@ -10732,7 +10732,7 @@
                     delta += " = " + simplex.deltas[simplex.total].print(printMode);
                     hint += formula + " = " + delta;
                     hint = CreateScrollBlock(hint);
-                    html += CreateHideOpenBlock('Подробный расчёт дельт', hint)
+                    html += CreateHideOpenBlock('Deltani batafsil hisoblash', hint)
                     return html;
                 }
                 function CheckPlan(simplex) {
@@ -10745,21 +10745,21 @@
                     return true;
                 }
                 function CheckPlanSolve(simplex) {
-                    let hint = CreateHideOpenBlock('Критерий оптимальности', "План оптимален, если в таблице отсутствуют " + (simplex.mode == MAX ? "отрицательные" : "положительные") + " дельты. ");
-                    let html = "<b>Проверяем план на оптимальность:</b> ";
+                    let hint = CreateHideOpenBlock('Optimallik mezoni', "Agar yo'q bo'lsa, reja optimal hisoblanadi " + (simplex.mode == MAX ? "salbiy" : "ijobiy") + " дельты. ");
+                    let html = "<b>Rejaning optimalligini tekshirish:</b> ";
                     for (let i = 0; i < simplex.total; i++) {
                         if (simplex.mode == MAX && simplex.deltas[i].isNeg()) {
-                            html += "план <b>не оптимален</b>, так как &Delta;<sub>" + (i + 1) + "</sub> = " + simplex.deltas[i].print(printMode) + " отрицательна.<br>";
+                            html += "reja <b>optimal emas</b>, chunki &Delta;<sub>" + (i + 1) + "</sub> = " + simplex.deltas[i].print(printMode) + " salbiy.<br>";
                             html += hint;
                             return html;
                         }
                         if (simplex.mode == MIN && simplex.deltas[i].isPos()) {
-                            html += "план <b>не оптимален</b>, так как &Delta;<sub>" + (i + 1) + "</sub> = " + simplex.deltas[i].print(printMode) + " положительна.<br>";
+                            html += "reja <b>optimal emas</b>, chunki &Delta;<sub>" + (i + 1) + "</sub> = " + simplex.deltas[i].print(printMode) + " ijobiy.<br>";
                             html += hint;
                             return html;
                         }
                     }
-                    html += (simplex.mode == MAX ? "отрицательные" : "положительные") + " дельты отсутствуют, следовательно <b>план оптимален</b>.<br>"
+                    html += (simplex.mode == MAX ? "salbiy" : "ijobiy") + " deltalar yo'q, shuning uchun <b>reja optimaldir</b>.<br>"
                     html += hint;
                     return html;
                 }
@@ -10838,7 +10838,7 @@
                     for (let i = 0; i < simplex.C.length; i++)
                         html += "<td>" + simplex.C[i].print(printMode) + "</td>";
                     html += "</tr>"
-                    html += "<tr><th>базис</th>"
+                    html += "<tr><th>asos</th>"
                     for (let i = 0; i < simplex.total; i++)
                         html += "<th>x<sub>" + (i + 1) + "</sub></th>";
                     html += "<th>b</th>"
@@ -10925,74 +10925,74 @@
                     let init = PrepareTable(n, m, func, restricts, mode)
                     html += init.html
                     let simplex = init.simplex
-                    html += "<b>Начальная симплекс-таблица</b>";
+                    html += "<b>Boshlang'ich simpleks jadvali</b>";
                     html += PrintTable(simplex);
                     let res = true;
                     if (!CheckBasis(simplex))
                         html += FindBasis(simplex);
                     if (!CheckBasis(simplex)) {
                         return {
-                            answer: "Решение задачи не существует.",
+                            answer: "Muammoning yechimi mavjud emas.",
                             solve: html
                         }
                     }
                     while (HaveNegativeB(simplex) && res) {
-                        html += "В столбце b присутствуют отрицательные значения.<br>"
+                        html += "B ustunida salbiy qiymatlar mavjud.<br>"
                         res = CheckSolveNegativeB(simplex);
                         html += RemoveNegativeB(simplex);
                     }
                     if (!res) {
                         return {
-                            answer: "Решение задачи не существует.",
+                            answer: "Muammoning yechimi mavjud emas.",
                             solve: html
                         }
                     }
                     CalculateDeltas(simplex);
-                    html += "<b>Вычисляем дельты:</b> ";
+                    html += "<b>Deltalarni hisoblang:</b> ";
                     html += CalculateDeltasSolve(simplex);
-                    html += "<b>Симплекс-таблица с дельтами</b>";
+                    html += "<b>Deltalar bilan oddiy jadval</b>";
                     html += PrintTable(simplex);
                     let iteration = 1;
                     html += CheckPlanSolve(simplex);
                     while (!CheckPlan(simplex)) {
-                        html += "<h3>Итерация " + iteration + "</h3>"
+                        html += "<h3>Takrorlash " + iteration + "</h3>"
                         let column = GetColumn(simplex);
-                        html += "Определяем <i>разрешающий столбец</i> - столбец, в котором находится ";
-                        html += (simplex.mode == MAX ? "минимальная" : "максимальная") + " дельта: ";
+                        html += "Biz aniqlaymiz <i>ustunni yoqish</i> - o'z ichiga olgan ustun ";
+                        html += (simplex.mode == MAX ? "minimal" : "maksimal") + " дельта: ";
                         html += (column + 1) + ", &Delta;<sub>" + (column + 1) + "</sub>: " + simplex.deltas[column].print(printMode) + "<br>";
-                        html += "Находим симплекс-отношения Q, путём деления коэффициентов b на соответствующие значения столбца " + (column + 1) + "<br>"
+                        html += "B koeffitsientlarini ustunning tegishli qiymatlariga bo'lish orqali biz Q simpleks munosabatlarini topamiz " + (column + 1) + "<br>"
                         let row = GetQandRow(simplex, column);
                         if (row == -1) {
                             html += PrintTable(simplex, -1, column);
-                            html += "Все значения столбца " + (column + 1) + " неположительны.<br>";
-                            html += "<b>Функция не ограничена. Оптимальное решение отсутствует</b>.<br>";
+                            html += "Barcha ustun qiymatlari " + (column + 1) + " ijobiy bo'lmagan.<br>";
+                            html += "<b>Funktsiya cheklanmagan. Optimal yechim yo'q</b>.<br>";
                             return {
-                                answer: "Функция не ограничена. Оптимальное решение отсутствует.",
+                                answer: "Funktsiya cheklanmagan. Optimal yechim yo'q.",
                                 solve: html
                             }
                         }
-                        html += "В найденном столбце ищем строку с наименьшим значением Q: Q<sub>min</sub> = " + simplex.Q[row].print(printMode) + ", строка " + (row + 1) + ".<br>";
-                        html += "На пересечении найденных строки и столбца находится <i>разрешающий элемент</i>: " + simplex.table[row][column].print(printMode) + "<br>";
+                        html += "Topilgan ustunda biz eng kichik qiymatga ega qatorni qidiramiz Q: Q<sub>min</sub> = " + simplex.Q[row].print(printMode) + ", строка " + (row + 1) + ".<br>";
+                        html += "Topilgan satr va ustunning kesishmasida joylashgan <i>faollashtiruvchi element</i>: " + simplex.table[row][column].print(printMode) + "<br>";
                         html += MakeVarBasis(simplex, row, column, true);
                         CalculateDeltas(simplex);
-                        html += "<b>Вычисляем новые дельты:</b> ";
+                        html += "<b>Yangi deltalarni hisoblash:</b> ";
                         html += CalculateDeltasSolve(simplex);
-                        html += "<b>Симплекс-таблица с обновлёнными дельтами</b>";
+                        html += "<b>Yangilangan deltalar bilan oddiy jadval</b>";
                         html += PrintTable(simplex);
                         let F = CalcFunction(simplex);
-                        html += "<b>Текущий план X:</b> " + F.plan + "<br>";
-                        html += "<b>Целевая функция F:</b> " + F.solve + " = " + F.result.print(printMode) + "<br>";
+                        html += "<b>joriy reja X:</b> " + F.plan + "<br>";
+                        html += "<b>maqsad funktsiyasi F:</b> " + F.solve + " = " + F.result.print(printMode) + "<br>";
                         iteration++;
                         html += CheckPlanSolve(simplex);
                     }
                     if (HaveNegativeB(simplex)) {
-                        html += "В столбце b присутствуют отрицательные значения. Решения не существует.";
+                        html += "B ustunida salbiy qiymatlar mavjud. Yechim mavjud emas.";
                         return {
-                            answer: "В столбце b присутствуют отрицательные значения. Решения не существует.",
+                            answer: "B ustunida salbiy qiymatlar mavjud. Yechim mavjud emas.",
                             solve: html
                         }
                     }
-                    html += "<b>Ответ:</b> ";
+                    html += "<b>Javob:</b> ";
                     let answer = PrintAnswer(simplex)
                     return {
                         answer: answer,
@@ -11079,7 +11079,7 @@
                     return v.a.isZero() && v.m.isZero();
                 }
                 function ChangeSignsArtificialBasis(restricts) {
-                    let html = "<b>Меняем знаки у ограничений с отрицательными свободными коэффициентами, путём умножения на -1:</b><br>";
+                    let html = "<b>Manfiy erkin koeffitsientlar bilan cheklovlar belgilarini ko'paytirish orqali o'zgartiramiz -1:</b><br>";
                     let have = false;
                     for (let i = 0; i < restricts.length; i++) {
                         if (restricts[i].b.isNeg()) {
@@ -11110,7 +11110,7 @@
                         html += "<td>" + PrintAM(simplex.C[i]) + "</td>";
                     }
                     html += "</tr>"
-                    html += "<tr><th>базис</th>"
+                    html += "<tr><th>asos</th>"
                     for (let i = 0; i < simplex.total; i++) {
                         if (i < simplex.total - simplex.avars.length) {
                             html += "<th>x<sub>" + (i + 1) + "</sub></th>";
@@ -11226,7 +11226,7 @@
                     delta += " = " + PrintAM(simplex.deltas[simplex.total]);
                     hint += formula + " = " + delta;
                     hint = CreateScrollBlock(hint);
-                    html += CreateHideOpenBlock('Подробный расчёт дельт', hint)
+                    html += CreateHideOpenBlock('Deltani batafsil hisoblash', hint)
                     return html;
                 }
                 function PrepareArtificialBasis(n, m, func, restricts, mode) {
@@ -11236,11 +11236,11 @@
                             k++;
                     let html = "";
                     if (k > 2) {
-                        html += "Для каждого ограничения с неравенством <b>добавляем дополнительные переменные</b> x<sub>" + (n + 1) + "</sub>..x<sub>" + (n + k) + "</sub>.<br>"
+                        html += "Tengsizlik bilan har bir cheklov uchun<b>qo'shimcha qo'shing ozgaruvchilar</b> x<sub>" + (n + 1) + "</sub>..x<sub>" + (n + k) + "</sub>.<br>"
                     } else if (k == 2) {
-                        html += "Для каждого ограничения с неравенством <b>добавляем дополнительные переменные</b> x<sub>" + (n + 1) + "</sub> и x<sub>" + (n + k) + "</sub>.<br>"
+                        html += "Tengsizlik bilan har bir cheklov uchun<b>qo'shimcha qo'shing ozgaruvchilar</b> x<sub>" + (n + 1) + "</sub> и x<sub>" + (n + k) + "</sub>.<br>"
                     } else if (k == 1) {
-                        html += "Для ограничения с неравенством <b>добавляем дополнительную переменную</b> x<sub>" + (n + 1) + "</sub>.<br>"
+                        html += "Tengsizlik bilan cheklash uchun<b>qo'shimcha o'zgaruvchini qo'shing</b> x<sub>" + (n + 1) + "</sub>.<br>"
                     }
                     let simplex = {
                         n: n,
@@ -11266,11 +11266,11 @@
                         if (restricts[i].sign == EQ) {
                             simplex.basis.push(unknown);
                             unknown--;
-                            basisHtml[simplex.basis.length - 1] = "Ограничение " + (i + 1) + " содержит равенство. Базисная переменная для этого ограничения будет определена позднее.<br>";
+                            basisHtml[simplex.basis.length - 1] = "Cheklash " + (i + 1) + " tenglikni o‘z ichiga oladi. Ushbu cheklovning asosiy o'zgaruvchisi keyinroq aniqlanadi.<br>";
                         } else if (restricts[i].sign == GE) {
                             simplex.basis.push(unknown);
                             unknown--;
-                            basisHtml[simplex.basis.length - 1] = "Ограничение " + (i + 1) + " содержит неравенство с " + GE + ". Базисная переменная для этого ограничения будет определена позднее.<br>";
+                            basisHtml[simplex.basis.length - 1] = "Cheklash " + (i + 1) + " bilan tengsizlikni o'z ichiga oladi " + GE + ". Ushbu cheklovning asosiy o'zgaruvchisi keyinroq aniqlanadi.<br>";
                         }
                         for (let j = 0; j < k; j++) {
                             if (restricts[i].sign == EQ) {
@@ -11281,7 +11281,7 @@
                                 } else if (!inserted) {
                                     simplex.table[i].push(new Fraction("1"));
                                     simplex.basis.push(n + index);
-                                    basisHtml[simplex.basis.length - 1] = "Ограничение " + (i + 1) + " содержит неравенство, базисной будет добавленная дополнительная переменная x<sub>" + (n + index + 1) + "</sub><br>"
+                                    basisHtml[simplex.basis.length - 1] = "Cheklash " + (i + 1) + " tengsizlikni o'z ichiga oladi, qo'shilgan qo'shimcha o'zgaruvchi asos bo'ladi x<sub>" + (n + index + 1) + "</sub><br>"
                                     index++;
                                     inserted = true;
                                 }
@@ -11304,7 +11304,7 @@
                         let column = GetIdentityColumn(simplex, i);
                         if (column != -1) {
                             simplex.basis[i] = column;
-                            basisHtml[i] = "Столбец " + (column + 1) + " является частью единичной матрицы. Переменная x<sub>" + (column + 1) + "</sub> входит в начальный базис<br>";
+                            basisHtml[i] = "Ustun " + (column + 1) + " identifikatsiya matritsasining bir qismidir. O'zgaruvchan x<sub>" + (column + 1) + "</sub> dastlabki asosga kiritilgan<br>";
                         } else {
                             unknown++;
                         }
@@ -11326,11 +11326,11 @@
                         m: new Fraction("0")
                     })
                     html += basisHtml.join("");
-                    html += "<br><b>Начальная симплекс-таблица</b>"
+                    html += "<br><b>Boshlang'ich simpleks jadvali</b>"
                     html += PrintTableArtificialBasis(simplex);
                     simplex.total += unknown;
                     if (unknown == 0) {
-                        html += "Так как были найдены все базисные переменные, то нет необходимости добавления искусственных переменных.<br><br>";
+                        html += "chunki barcha asosiy o'zgaruvchilar topilgan bo'lsa, unda sun'iy o'zgaruvchilarni qo'shishning hojati yo'q.<br><br>";
                     } else {
                         for (let i = 0; i < unknown; i++) {
                             simplex.avars.push(i);
@@ -11341,7 +11341,7 @@
                         for (let i = 0; i < m; i++) {
                             if (simplex.basis[i] >= 0)
                                 continue;
-                            html += "Для ограничения " + (i + 1) + " добавляем искусственную переменную u<sub>" + (index + 1) + "</sub> и делаем её базисной.<br>";
+                            html += "Cheklov uchun " + (i + 1) + " sun'iy o'zgaruvchini qo'shing u<sub>" + (index + 1) + "</sub> va uni asosga aylantiring.<br>";
                             simplex.table[i][n + k + index] = new Fraction("1");
                             simplex.basis[i] = n + k + index;
                             index++;
@@ -11357,10 +11357,10 @@
                             a: new Fraction("0"),
                             m: new Fraction("0")
                         })
-                        html += "В целевую функцию добавляем искусственные пременные с коэффициентом " + (mode == MAX ? "-M" : "M") + ", где M — очень большое число.<br>";
-                        html += "<br><b>Таблица с искусственными переменными</b>"
+                        html += "Maqsad funksiyasiga koeffitsient bilan sun'iy o'zgaruvchilar qo'shamiz" + (mode == MAX ? "-M" : "M") + ", bu yerda M juda katta son.<br>";
+                        html += "<br><b>Sun'iy o'zgaruvchilar bilan jadval</b>"
                         html += PrintTableArtificialBasis(simplex);
-                        html += "<b>Перепишем условие задачи с учётом добавленных искусственных переменных:</b><br>"
+                        html += "<b>Qo'shilgan sun'iy o'zgaruvchilarni hisobga olgan holda muammoning shartini qayta yozing:</b><br>"
                         html += "F = ";
                         let printed = false;
                         for (let i = 0; i < simplex.total; i++) {
@@ -11408,7 +11408,7 @@
                             }
                             html += "= " + simplex.b[i].print(printMode) + "<br>";
                         }
-                        html += "<br><b>Выразим искусственные переменные через базовые" + (k > 0 ? " и дополнительные" : "") + ":</b><br>"
+                        html += "<br><b>Sun'iy o'zgaruvchilarni asosiy o'zgaruvchilar bilan ifodalaymiz" + (k > 0 ? " va qo'shimcha" : "") + ":</b><br>"
                         for (let i = 0; i < m; i++) {
                             if (simplex.basis[i] < simplex.total - simplex.avars.length)
                                 continue;
@@ -11444,21 +11444,21 @@
                     return true;
                 }
                 function CheckPlanArtificialBasisSolve(simplex) {
-                    let hint = CreateHideOpenBlock('Критерий оптимальности', "План оптимален, если в таблице отсутствуют " + (simplex.mode == MAX ? "отрицательные" : "положительные") + " дельты. ");
-                    let html = "<b>Проверяем план на оптимальность:</b> ";
+                    let hint = CreateHideOpenBlock('Optimallik mezoni', "Agar yo'q bo'lsa, reja optimal hisoblanadi " + (simplex.mode == MAX ? "salbiy" : "ijobiy") + " дельты. ");
+                    let html = "<b>Rejaning optimalligini tekshirish:</b> ";
                     for (let i = 0; i < simplex.total; i++) {
                         if (simplex.mode == MAX && IsNegAM(simplex.deltas[i])) {
-                            html += "план <b>не оптимален</b>, так как &Delta;<sub>" + (i + 1) + "</sub> = " + PrintAM(simplex.deltas[i]) + " отрицательна.<br>";
+                            html += "reja <b>optimal emas</b>, chunki &Delta;<sub>" + (i + 1) + "</sub> = " + PrintAM(simplex.deltas[i]) + " salbiy.<br>";
                             html += hint;
                             return html;
                         }
                         if (simplex.mode == MIN && IsPosAM(simplex.deltas[i])) {
-                            html += "план <b>не оптимален</b>, так как &Delta;<sub>" + (i + 1) + "</sub> = " + PrintAM(simplex.deltas[i]) + " положительна.<br>";
+                            html += "reja <b>optimal emas</b>, chunki &Delta;<sub>" + (i + 1) + "</sub> = " + PrintAM(simplex.deltas[i]) + " ijobiy.<br>";
                             html += hint;
                             return html;
                         }
                     }
-                    html += (simplex.mode == MAX ? "отрицательные" : "положительные") + " дельты отсутствуют, следовательно <b>план оптимален</b>.<br>"
+                    html += (simplex.mode == MAX ? "salbiy" : "ijobiy") + " deltalar yo'q, shuning uchun <b>reja optimaldir</b>.<br>"
                     html += hint;
                     return html;
                 }
@@ -11495,24 +11495,24 @@
                 function MakeVarBasisArtificial(simplex, row, column, print=false) {
                     let html = "";
                     if (simplex.basis[row] >= simplex.total - simplex.avars.length)
-                        html += "В качестве базисной переменной u<sub>" + (1 + simplex.basis[row] - simplex.total + simplex.avars.length) + "</sub> берём x<sub>" + (column + 1) + "</sub>.<br>"
+                        html += "Asosiy o'zgaruvchi sifatida u<sub>" + (1 + simplex.basis[row] - simplex.total + simplex.avars.length) + "</sub> olish x<sub>" + (column + 1) + "</sub>.<br>"
                     else
-                        html += "В качестве базисной переменной x<sub>" + (simplex.basis[row] + 1) + "</sub> берём x<sub>" + (column + 1) + "</sub>.<br>"
+                        html += "Asosiy o'zgaruvchi sifatida x<sub>" + (simplex.basis[row] + 1) + "</sub> olish x<sub>" + (column + 1) + "</sub>.<br>"
                     simplex.basis[row] = column;
                     if (print)
                         html += PrintTableArtificialBasis(simplex, row, column);
                     let x = simplex.table[row][column];
                     if (!x.isOne())
-                        html += "Делим строку " + (row + 1) + " на " + x.print(printMode) + ". ";
+                        html += "Ipni ajrating " + (row + 1) + " на " + x.print(printMode) + ". ";
                     let rows = []
                     for (let i = 1; i <= simplex.m; i++)
                         if (i != row + 1)
                             rows.push(i)
                     if (rows.length > 1)
-                        html += "Из строк " + rows.join(", ");
+                        html += "Chiziqlardan " + rows.join(", ");
                     else
-                        html += "Из строки " + rows[0]
-                    html += " вычитаем строку " + (row + 1) + ", умноженную на соответствующий элемент в столбце " + (column + 1) + ".<br>"
+                        html += "Bir qatordan " + rows[0]
+                    html += " chiziqni olib tashlang " + (row + 1) + ", ustundagi mos keladigan elementga ko'paytiriladi " + (column + 1) + ".<br>"
                     DivRow(simplex, row, x);
                     SubRows(simplex, row, column);
                     return html;
@@ -11577,64 +11577,64 @@
                     let simplex = init.simplex;
                     html += init.html;
                     CalculateDeltasArtificialBasis(simplex);
-                    html += "<b>Вычисляем дельты:</b> ";
+                    html += "<b>Deltalarni hisoblang:</b> ";
                     html += CalculateDeltasArtificialBasisSolve(simplex);
-                    html += "<b>Симплекс-таблица с дельтами</b>";
+                    html += "<b>Deltalar bilan oddiy jadval</b>";
                     html += PrintTableArtificialBasis(simplex)
                     let iteration = 1;
                     let F = CalcFunctionArtificialBasis(simplex);
-                    html += "<b>Текущий план X:</b> " + F.plan + "<br>";
-                    html += "<b>Целевая функция F:</b> " + F.solve + " = " + PrintAM(F.result) + "<br>";
+                    html += "<b>joriy reja X:</b> " + F.plan + "<br>";
+                    html += "<b>maqsad funktsiyasi F:</b> " + F.solve + " = " + PrintAM(F.result) + "<br>";
                     html += CheckPlanArtificialBasisSolve(simplex);
                     while (!CheckPlanArtificialBasis(simplex)) {
-                        html += "<h3>Итерация " + iteration + "</h3>"
+                        html += "<h3>Takrorlash " + iteration + "</h3>"
                         let column = GetColumnArtificialBasis(simplex);
-                        html += "Определяем <i>разрешающий столбец</i> - столбец, в котором находится ";
-                        html += (simplex.mode == MAX ? "минимальная" : "максимальная") + " дельта: ";
+                        html += "Biz aniqlaymiz <i>ustunni yoqish</i> - o'z ichiga olgan ustun ";
+                        html += (simplex.mode == MAX ? "minimal" : "maksimal") + " дельта: ";
                         html += (column + 1) + ", &Delta;<sub>" + (column + 1) + "</sub>: " + PrintAM(simplex.deltas[column]) + "<br>";
-                        html += "Находим симплекс-отношения Q, путём деления коэффициентов b на соответствующие значения столбца " + (column + 1) + "<br>"
+                        html += "B koeffitsientlarini ustunning tegishli qiymatlariga bo'lish orqali biz Q simpleks munosabatlarini topamiz " + (column + 1) + "<br>"
                         let row = GetQandRowArtificialBasis(simplex, column);
                         if (row == -1) {
                             html += PrintTableArtificialBasis(simplex, -1, column);
-                            html += "Все значения столбца " + (column + 1) + " неположительны.<br>";
-                            html += "<b>Функция не ограничена. Оптимальное решение отсутствует</b>.<br>";
+                            html += "Barcha ustun qiymatlari " + (column + 1) + " ijobiy bo'lmagan.<br>";
+                            html += "<b>Funktsiya cheklanmagan. Optimal yechim yo'q</b>.<br>";
                             return {
-                                answer: "Функция не ограничена. Оптимальное решение отсутствует.",
+                                answer: "Funktsiya cheklanmagan. Optimal yechim yo'q.",
                                 solve: html
                             }
                         }
-                        html += "В найденном столбце ищем строку с наименьшим значением Q: Q<sub>min</sub> = " + simplex.Q[row].print(printMode) + ", строка " + (row + 1) + ".<br>";
-                        html += "На пересечении найденных строки и столбца находится <i>разрешающий элемент</i>: " + simplex.table[row][column].print(printMode) + "<br>";
+                        html += "Topilgan ustunda biz eng kichik qiymatga ega qatorni qidiramiz Q: Q<sub>min</sub> = " + simplex.Q[row].print(printMode) + ", строка " + (row + 1) + ".<br>";
+                        html += "Topilgan satr va ustunning kesishmasida joylashgan <i>faollashtiruvchi element</i>: " + simplex.table[row][column].print(printMode) + "<br>";
                         html += MakeVarBasisArtificial(simplex, row, column, true);
                         CalculateDeltasArtificialBasis(simplex);
-                        html += "<b>Вычисляем новые дельты:</b> ";
+                        html += "<b>Yangi deltalarni hisoblang:</b> ";
                         html += CalculateDeltasArtificialBasisSolve(simplex);
-                        html += "<b>Симплекс-таблица с обновлёнными дельтами</b>";
+                        html += "<b>Yangilangan deltalar bilan oddiy jadval</b>";
                         html += PrintTableArtificialBasis(simplex);
                         let F = CalcFunctionArtificialBasis(simplex);
-                        html += "<b>Текущий план X:</b> " + F.plan + "<br>";
-                        html += "<b>Целевая функция F:</b> " + F.solve + " = " + PrintAM(F.result) + "<br>";
+                        html += "<b>joriy reja X:</b> " + F.plan + "<br>";
+                        html += "<b>maqsad funktsiyasi F:</b> " + F.solve + " = " + PrintAM(F.result) + "<br>";
                         iteration++;
                         html += CheckPlanArtificialBasisSolve(simplex);
                     }
                     if (HaveArtificialBasis(simplex)) {
-                        html += "Так как в оптимальном решении пристуствуют искусственные переменные, то задача не имеет допустимого решения.";
+                        html += "Optimal yechimda sun'iy o'zgaruvchilar mavjud bo'lgani uchun muammoning mumkin bo'lgan yechimi yo'q.";
                         return {
-                            answer: "Задача не имеет допустимого решения.",
+                            answer: "Muammoning mumkin bo'lgan yechimi yo'q.",
                             solve: html
                         }
                     }
                     if (HaveNegativeB(simplex)) {
-                        html += "В столбце b присутствуют отрицательные значения. Решения не существует.";
+                        html += "B ustunida salbiy qiymatlar mavjud. Yechim mavjud emas.";
                         return {
-                            answer: "Решения не существует.",
+                            answer: "Yechim mavjud emas.",
                             solve: html
                         }
                     }
                     if (HaveArtificialBasis(simplex, false)) {
-                        html += "Искусственные переменные остались базисными, однако свободный коэффициент при них равен нулю.<br>";
+                        html += "Sun'iy o'zgaruvchilar asosiy bo'lib qoldi, ammo ular uchun erkin koeffitsient nolga teng.<br>";
                     }
-                    html += "<b>Ответ:</b> ";
+                    html += "<b>Javob:</b> ";
                     let answer = PrintAnswerArtificialBasis(simplex)
                     return {
                         answer: answer,
@@ -11657,7 +11657,7 @@
                         let func = GetFunctionCoefficients(n)
                         let restricts = GetRestrictCoefficients(n, m);
                         printMode = asFraqtions.checked ? 1 : 2
-                        solveBox.innerHTML = "<h3>Введённые данные</h3>";
+                        solveBox.innerHTML = "<h3>Kiritilgan maʼlumotlar</h3>";
                         solveBox.innerHTML += "<div class='scroll-block'>";
                         solveBox.innerHTML += PrintFunction(func);
                         solveBox.innerHTML += "&rarr; " + mode
@@ -11673,16 +11673,16 @@
                         if (withSolveBox.checked) {
                             if (solveType.value == "1") {
                                 result = SolveTable(n, m, func, restricts, mode);
-                                solveBox.innerHTML += "<h3>Ответ</h3>" + CreateScrollBlock(result.answer);
-                                solveBox.innerHTML += "<h3>Решение базовым симплекс-методом</h3> " + result.solve;
+                                solveBox.innerHTML += "<h3>Javob</h3>" + CreateScrollBlock(result.answer);
+                                solveBox.innerHTML += "<h3>Asosiy simpleks usuli bilan yechish</h3> " + result.solve;
                             } else {
                                 result = SolveArtificialBasis(n, m, func, restricts, mode);
-                                solveBox.innerHTML += "<h3>Ответ</h3>" + CreateScrollBlock(result.answer);
-                                solveBox.innerHTML += "<h3>Решение методом искусственного базиса</h3> " + result.solve
+                                solveBox.innerHTML += "<h3>Javob</h3>" + CreateScrollBlock(result.answer);
+                                solveBox.innerHTML += "<h3>Sun'iy asos usuli bilan yechim</h3> " + result.solve
                             }
                         } else {
                             result = SolveTable(n, m, func, restricts, mode);
-                            solveBox.innerHTML += "<h3>Ответ</h3>" + CreateScrollBlock(result.answer);
+                            solveBox.innerHTML += "<h3>Javob</h3>" + CreateScrollBlock(result.answer);
                         }
                         updateScrollblocks()
                         scrollTo('#simplex-solve')
@@ -11704,7 +11704,7 @@
                     calc.appendChild(document.createElement("hr"))
                     for (let i = 1; i <= 7; i++) {
                         let input = document.createElement('div')
-                        input.innerHTML = "Пример " + i
+                        input.innerHTML = "Misol " + i
                         input.className = 'simplex-btn'
                         input.style.marginRight = '5px'
                         input.style.fontSize = "8pt"
@@ -11724,7 +11724,7 @@
                     let restricts = GetRestrictCoefficients(n, m);
                     for (let i = 0; i < m; i++) {
                         if (restricts[i].sign == EQ) {
-                            alert("Невозможно сделать двойственной задачу, содержащую ограничения с равенством");
+                            alert("Cheklovlarni o'z ichiga olgan muammoni tenglik bilan ikkilashtirish mumkin emas");
                             return;
                         }
                     }
